@@ -16,18 +16,37 @@ the results different shapes?
 Submit your code for all 4 parts in a file named makeArrays.py. You should be able to solve
 parts (a) and (b) using one line of code each.
 '''
-array_a = np.ndarray(
-    [2, 2, 2, 2],
-    [2, 2, 2, 2],
-    [2, 2, 2, 2],
-    [2, 2, 2, 2],
-    [2, 2, 2, 2],
-    [2, 2, 2, 2]) #array of 6x4 with each element being a 2
 
-array_b = np.ndarray(
-    [3, 1, 1, 1],
+#part a 
+array_a = np.array(
+    [[2, 2, 2, 2],
+    [2, 2, 2, 2],
+    [2, 2, 2, 2],
+    [2, 2, 2, 2],
+    [2, 2, 2, 2],
+    [2, 2, 2, 2]]) 
+
+#part b 
+array_b = np.array(
+    [[3, 1, 1, 1],
     [2, 3, 1, 1],
     [1, 1, 3, 1],
     [1, 1, 1, 3],
     [1, 1, 1, 1],
-    [1, 1, 1, 1])
+    [1, 1, 1, 1]]) 
+
+#part c
+'''The * operation is element wise multiplication of matrices, while the np.dot operation 
+takes the dot product. This is why the former works but the latter does not. In order for
+the dot product to be successful, the number of rows in one matrix must equal the number of
+columns in the other. In this case, because they are the same dimension, this is not possible
+and hence the dot product fails. Element-wise multiplication, on the other hand, relies on both
+matrices to be the same dimension and hence the * operation works properly in this case.'''
+
+#part d 
+print(np.dot(array_a.transpose(),array_b))
+print(np.dot(array_a,array_b.transpose()))
+
+'''For the first option: The array_a becomes a 4x6 matrix and the dot product of a x4 and 
+4x6 matrix is taken. Hence, the first option makes a 4x4 matrix per the rules of matrix multiplication. 
+For the second option: The array_a stays a 6x4 '''
