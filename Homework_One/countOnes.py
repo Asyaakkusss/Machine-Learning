@@ -20,6 +20,12 @@ def countOnesLoop(matrix):
                 counter+=1 
     print(counter)
 
+def countOnesWhere(matrix): 
+   counter = 0; 
+   b = np.where(matrix == 1)
+   counter = len(b[0])
+   print(counter)
+
 array_a = np.array(
     [[1, 1, 1, 1],
     [1, 1, 1, 1],
@@ -29,3 +35,5 @@ array_a = np.array(
     [2, 2, 2, 1]]) 
 
 countOnesLoop(array_a)
+
+countOnesWhere(array_a)
