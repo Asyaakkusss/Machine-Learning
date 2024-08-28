@@ -47,6 +47,10 @@ matrices to be the same dimension and hence the * operation works properly in th
 print(np.dot(array_a.transpose(),array_b))
 print(np.dot(array_a,array_b.transpose()))
 
-'''For the first option: The array_a becomes a 4x6 matrix and the dot product of a x4 and 
-4x6 matrix is taken. Hence, the first option makes a 4x4 matrix per the rules of matrix multiplication. 
-For the second option: The array_a stays a 6x4 '''
+'''For the first option: The array_a becomes a 4x6 matrix and the dot product of a 4x6 and 
+6x4 matrix is taken. Hence, the first option makes a 4x4 matrix per the rules of dot products. 
+The number of rows in A (4) matches the number of columns in B (4). 
+   For the second option: The array_a stays a 6x4 matrix and the dot product of a 6x4 and 
+4x6 matrix is taken when the transpose of array_b turns its dimensions into something different.
+The number of rows in A (6) matches the number of columns in B (6). Hence, the first option
+makes a 6x6 matrix per the rules of dot products.'''
