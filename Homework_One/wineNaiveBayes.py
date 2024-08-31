@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt 
 '''
 When applying naïve Bayes to continuous (real-valued) attributes, there are two typical ap-
 proaches:
