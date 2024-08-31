@@ -49,31 +49,35 @@ class Perceptron:
         return np.dot(X, self.w_) + self.b_
     def predict(self, X):
         return np.where(self.net_input(X) >= 0.0, 1, 0)
-#%% Train Perceptron on pima data 
-X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-y_or = np.array([0, 1, 1, 1])
-ppn_or = Perceptron(eta=0.1, n_iter=10, random_state=random_state)
-ppn_or.fit(X, y_or)
-plt.plot(range(1, len(ppn_or.errors_) + 1), ppn_or.errors_, marker='o')
+    
+#Train Perceptron on pima data
+
+#turn csv file into np array 
+X = np.genfromtxt('C:/Machine Learning/pima-indians-diabetes.csv', delimiter=',', skip_header=1)
+
+#target values 
+y_or = np.array(["Number of times pregnant", 
+                 "Plasma glucose concentration a 2 hours in an oral glucose tolerance test", 
+                 "Diastolic blood pressure (mm Hg)", 
+                 "Triceps skin fold thickness (mm)", 
+                 "2-Hour serum insulin (mu U/ml)", 
+                 "Body mass index (weight in kg/(height in m)^2)",  
+                 "Diabetes pedigree function", 
+                 "Age (years)", 
+                 "Class variable (0 or 1)"])
+ppn_pima = Perceptron(eta=0.1, n_iter=10, random_state=random_state)
+ppn_pima.fit(X, y_or)
+plt.plot(range(1, len(ppn_pima.errors_) + 1), ppn_pima.errors_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Number of updates')
-plt.title('OR data')
-print(*ppn_or.predictions_, sep='\n')
-#%% Train Perceptron on XOR data
+plt.title('Pima data')
+print(*ppn_pima.predictions_, sep='\n')
+#%% Train Perceptron on pima data
 y_xor = np.array([0, 1, 1, 0])
 ppn_xor = Perceptron(eta=0.1, n_iter=50, random_state=random_state)
 ppn_xor.fit(X, y_xor)
 plt.plot(range(1, len(ppn_xor.errors_) + 1), ppn_xor.errors_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Number of updates')
-plt.title('XOR data')
+plt.title('Pima data')
 print(*ppn_xor.predictions_, sep='\n')
-#%% Train Perceptron on XOR data in 3-D
-X_3d = np.c_[X, np.array([[0], [0], [0], [1]])]
-ppn_xor_3d = Perceptron(eta=0.1, n_iter=20, random_state=random_state)
-ppn_xor_3d.fit(X_3d, y_xor)
-plt.plot(range(1, len(ppn_xor_3d.errors_) + 1), ppn_xor_3d.errors_, marker='o')
-plt.xlabel('Epochs')
-plt.ylabel('Number of updates')
-plt.title('XOR 3-D data')
-print(*ppn_xor_3d.predictions_, sep='\n')
