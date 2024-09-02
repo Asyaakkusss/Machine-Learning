@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 import pandas as pd 
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB, BernoulliNB
 from sklearn.metrics import accuracy_score
 
 '''
@@ -36,6 +36,12 @@ and train/test split. For a Bernoulli naïve Bayes classifier, you will have to 
 threshold to use, which corresponds to the binarize parameter in the BernoulliNB
 class. Report the highest test set accuracy you are able to obtain for different thresholds.
 How does it compare to Gaussian naïve Bayes?
+
+The highest test set accuracy was when the binarization was 0.0. It sharply fell after this to the
+0.4 range after the second/third iterations (which indicate a binarization of 2 and 3, respectively).
+The highest accuracy I was able to obtain was 0.9213483146067416. This is still in the 90% range but 
+is still less accurate than Gaussian naive Bayes, which was closer to 0.95 accuracy level. 
+
 Submit your code for both methods in a file named wineNaiveBayes.py.
 '''
 
@@ -57,6 +63,7 @@ std_data = scaler.fit_transform(x_data)
 x_train, x_test, y_train, y_test = train_test_split(std_data, y_data, test_size=0.5, random_state = 1)
 
 #we now fit the Gaussian naive Bayes classifier to this data 
+
 model = GaussianNB()
 model.fit(x_train, y_train)
 
@@ -65,3 +72,20 @@ prediction = model.predict(x_test)
 test_accuracy = accuracy_score(y_test, prediction)
 
 print(test_accuracy)
+
+#now, using the same train/test split and preprocessing, we do this with BernoulliNB
+acc_array = []
+for i in range(0, 100): 
+    model_2 = BernoulliNB(binarize=i)
+    model_2.fit(x_train, y_train)
+
+    prediction_2 = model_2.predict(x_test)
+    test_accuracy_2 = accuracy_score(y_test, prediction_2)
+    acc_array.append(test_accuracy_2)
+
+iterations = np.arange(0, 100, 1)
+
+plt.plot(iterations, acc_array)
+plt.show()
+print(acc_array)
+print(iterations)
