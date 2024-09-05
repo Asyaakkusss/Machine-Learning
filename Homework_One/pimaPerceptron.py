@@ -10,13 +10,14 @@ Canvas). Do not split the data into training and test for this problem!
 a) Experiment with different learning rates and report the highest (training set) classification
 accuracy you can obtain.
 
-The highest classification accuracy came from some of the lowest learning rates, like 0.001 for example. 
+The highest classification accuracy came from any learning rate between 0.6 and 0.9. The accuracy at those points
+was reported as 1.0. 
 
 b) For the learning rate that gives the highest classification accuracy, plot the number of mis-
 classification errors against the number of epochs, similar to Figure 2.7 from the textbook
 (shown below for reference).
 
-Please find the code below. It will plot the small learning rate, with the x axis being #epochs
+Please find the code below. It will plot one of the learning rates, with the x axis being #epochs
 and the y axis being #updates. 
 Submit your code in a file named pimaPerceptron.py.
 '''
@@ -24,7 +25,7 @@ Submit your code in a file named pimaPerceptron.py.
 random_state = 1
 class Perceptron:
 
-    def __init__(self, learning_rate=1, iterations=150, random_state=1):
+    def __init__(self, learning_rate=0.1, iterations=150, random_state=1):
         self.learning_rate = learning_rate
         self.iterations = iterations
         self.random_state = random_state
@@ -69,7 +70,7 @@ scaler = StandardScaler()
 
 x_scale = scaler.fit_transform(features)
 
-ppn_pima = Perceptron(learning_rate=0.9, iterations=150, random_state=random_state)
+ppn_pima = Perceptron(learning_rate=0.6, iterations=150, random_state=random_state)
 ppn_pima.fit(x_scale, target_values)
 plt.plot(range(1, len(ppn_pima.errors) + 1), ppn_pima.errors, marker='o')
 plt.xlabel('Epochs')
@@ -78,6 +79,7 @@ plt.title('Pima data')
 
 plt.show()
 
-predictions = ppn_pima.predict(x_scale)
+predictions = ppn_pima.predict(X)
 print(np.shape(predictions))
 accuracy = accuracy_score(target_values, predictions)
+print(accuracy)
