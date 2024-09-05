@@ -32,20 +32,20 @@ class Perceptron:
     
     def fit(self, x, y):
         weight_init = np.random.RandomState(self.random_state)
-        self.weight = weight_init.normal(loc=0.0, scale=0.01, size=x.shape[1] + 1)
+        self.weight = weight_init.normal(loc=0.0, scale=0.01, size=x.shape[1])
         self.bias = np.float64(0.)
         self.errors = []
         self.predictions = [] # Added by Kevin
 
         for i in range(self.iterations):
             errors = 0
-            for xi, target in zip(X, y):
+            for xi, target in zip(x, y):
                 update = self.learning_rate * (target - self.predict(xi))
                 self.weight += update * xi
                 self.bias += update
                 errors += int(update != 0.0)
             self.errors.append(errors)
-            self.predictions.append(self.predict(X)) # Added by Kevin
+            self.predictions.append(self.predict(x)) # Added by Kevin
         return self
     
     def net_input(self, X):
@@ -79,7 +79,7 @@ plt.title('Pima data')
 
 plt.show()
 
-predictions = ppn_pima.predict(X)
+predictions = ppn_pima.predict(x_scale)
 print(np.shape(predictions))
 accuracy = accuracy_score(target_values, predictions)
 print(accuracy)
