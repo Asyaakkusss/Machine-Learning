@@ -10,8 +10,8 @@ Canvas). Do not split the data into training and test for this problem!
 a) Experiment with different learning rates and report the highest (training set) classification
 accuracy you can obtain.
 
-The highest classification accuracy came from any learning rate between 0.6 and 0.9. The accuracy at those points
-was reported as 1.0. 
+The highest classification accuracy came from any learning rate of 0.8. The accuracy at those points
+was reported as 0.7209908735332464. 
 
 b) For the learning rate that gives the highest classification accuracy, plot the number of mis-
 classification errors against the number of epochs, similar to Figure 2.7 from the textbook
@@ -70,7 +70,7 @@ scaler = StandardScaler()
 
 x_scale = scaler.fit_transform(features)
 
-ppn_pima = Perceptron(learning_rate=0.6, iterations=150, random_state=random_state)
+ppn_pima = Perceptron(learning_rate=0.8, iterations=150, random_state=random_state)
 ppn_pima.fit(x_scale, target_values)
 plt.plot(range(1, len(ppn_pima.errors) + 1), ppn_pima.errors, marker='o')
 plt.xlabel('Epochs')
