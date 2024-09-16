@@ -39,7 +39,7 @@ sc.fit(X_train)
 X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
-'''Fitting SVM model to the dataset'''
+'''Fitting SVM model to the dataset
 from sklearn.svm import SVC
 svm = SVC(kernel='linear', C=1.0, random_state=1)
 svm.fit(X_train_std, y_train)
@@ -48,5 +48,10 @@ svm.fit(X_train_std, y_train)
 predictions = svm.predict(X_test_std)
 accuracy = accuracy_score(y_test, predictions)
 print(accuracy)
-
+'''
 '''Fitting logistic regression to the dataset'''
+log = LogisticRegression(C=10.**10, multi_class='ovr')
+log.fit(X_train_std, y_train)
+predictions = log.predict(X_test_std)
+accuracy = accuracy_score(y_test, predictions)
+print(accuracy)
