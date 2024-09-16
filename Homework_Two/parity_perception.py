@@ -9,19 +9,30 @@ achieve this accuracy. Submit your code in a file named parity_perceptron.py.
 Answer: No, the perceptron cannot learn this problem for 3 inputs because the problem is not linearly separable
 in the case of 3 inputs. 
 
-  Inputs
------------
-|a   b   c|
-|---------|
-|0   0   0|
-|0   0   1|
-|0   1   0|
-|0   1   1|
-|1   0   0|
-|1   0   1|
-|1   1   0|
-|1   1   1|
------------
+Tables for input and target combinations: 
+
+  Inputs          Targets
+-----------       -------
+|a   b   c|       |--y--|
+|---------|       |-----|
+|0   0   0|       |  0  |
+|0   0   1|       |  0  |
+|0   1   0|       |  0  |
+|0   1   1|       |  1  |
+|1   0   0|       |  0  |
+|1   0   1|       |  1  |
+|1   1   0|       |  1  |
+|1   1   1|       |  0  |
+-----------       -------
+
+Diagram of network structure: see ProblemTwoNetwork.pdf
+
+TODO: ask professor about your perceptron and whether you should play around with weights and put them as an input. Is he 
+interested in original/initial weights or all of them in general? 
+
+Highest training set accuracy obtained: 0.75. The initial weights were [ 0.01624345 -0.00611756 -0.00528172]. The learning 
+rate was 0.0001. 
+
 '''
 import numpy as np
 import matplotlib.pyplot as plt 
@@ -31,7 +42,7 @@ from sklearn.metrics import accuracy_score
 random_state = 1
 class Perceptron:
 
-    def __init__(self, learning_rate=0.1, iterations=150, random_state=1):
+    def __init__(self, learning_rate=0.0001, iterations=150, random_state=1):
         self.learning_rate = learning_rate
         self.iterations = iterations
         self.random_state = random_state
@@ -39,6 +50,7 @@ class Perceptron:
     def fit(self, x, y):
         weight_init = np.random.RandomState(self.random_state)
         self.weight = weight_init.normal(loc=0.0, scale=0.01, size=x.shape[1])
+        print("initial weight: ", self.weight)
         self.bias = np.float64(0.)
         self.errors = []
         self.predictions = [] # Added by Kevin
@@ -48,6 +60,7 @@ class Perceptron:
             for xi, target in zip(x, y):
                 update = self.learning_rate * (target - self.predict(xi))
                 self.weight += update * xi
+                print("subsequent weights: ", self.weight)
                 self.bias += update
                 errors += int(update != 0.0)
             self.errors.append(errors)
@@ -90,3 +103,5 @@ plt.show()
 predictions = perceptron.predict(X)
 accuracy = accuracy_score(y, predictions)
 print(accuracy)
+
+
