@@ -42,7 +42,7 @@ from sklearn.metrics import accuracy_score
 random_state = 1
 class Perceptron:
 
-    def __init__(self, learning_rate=0.0001, iterations=150, random_state=1):
+    def __init__(self, learning_rate=0.0001, iterations=10, random_state=1):
         self.learning_rate = learning_rate
         self.iterations = iterations
         self.random_state = random_state
@@ -87,7 +87,7 @@ X=np.array([[0,0,0],
 y = np.array([0, 0, 0, 1, 0, 1, 1, 0])
 
 
-perceptron = Perceptron(0.0001, 50, random_state)
+perceptron = Perceptron(0.0001, 10, random_state)
 
 perceptron.fit(X, y)
 
