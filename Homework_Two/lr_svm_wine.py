@@ -31,10 +31,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
 import pandas as pd 
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 
 #read in csv file in the form of a pandas data frame 
 data_frame = pd.read_csv("/home/asyaakkus/Machine-Learning/wine.data.csv")
@@ -59,8 +58,6 @@ X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
 '''Fitting SVM model to the dataset'''
-from sklearn.svm import SVC
-
 #linear
 #svm = SVC(kernel='linear', C=5, random_state=1)
 
