@@ -5,6 +5,25 @@ Homework 1, first pre-process the data by standardizing each attribute, and then
 50/50 into training and test sets using train_test_split() with random_state=1 to provide
 a fixed seed. Report the highest test set accuracy you are able to obtain for each classifier. Submit
 your code in a file named lr_svm_wine.py.
+
+Trying different kernels: 
+
+'poly': The major things that were tuned manually for this kernel were the the degree and coef. The coef
+did not change the accuracy much unless it was set to 0. In that case, the model became much less accurate. 
+As the degree went up, the accuracy went down. The range with the best accuracy were degrees 1-5. The highest
+test set accuracy obtained for the poly classifier was 0.9775280898876404. 
+
+'linear': C was the major thing to tweak in this model. When C was between 0 and 1, the model tended to be less 
+accurate. Making it very large did not make much of a difference. The highest test set accuracy obtained for the 
+linear classifier was 0.9775280898876404. 
+
+'rbf' (aka Gaussian): A C of one yielded a high accuracy. The highest test set accuracy obtained for the gaussian 
+classifier was 1.0 with C = 1. If C was very large or very small (between 0 and 1), the accuracy obtained went down
+significantly. Changing gamma from "scale" to "auto" did not change the accuracy much, if at all. 
+
+'sigmoid': A C of one yielded a high accuracy. The highest test set accuracy obtained for the sigmoid classififier was 
+0.9887640449438202 with C = 1. If C was very large of very small (between 0 and 1), the accuracy obtained went down
+significantly. Changing gamma from "scale" to "auto" did not change the accuracy much, if at all. 
 '''
 
 from sklearn import datasets
@@ -39,16 +58,28 @@ sc.fit(X_train)
 X_train_std = sc.transform(X_train)
 X_test_std = sc.transform(X_test)
 
-'''Fitting SVM model to the dataset
+'''Fitting SVM model to the dataset'''
 from sklearn.svm import SVC
-svm = SVC(kernel='linear', C=1.0, random_state=1)
+
+#linear
+#svm = SVC(kernel='linear', C=5, random_state=1)
+
+#poly
+#svm = SVC(kernel='poly', degree=5, coef0=1, gamma='scale', random_state=1)
+
+#rbf (Gaussian)
+#svm = SVC(kernel='rbf', C=1, gamma='scale', random_state=1)
+
+#sigmoid
+svm = SVC(kernel='sigmoid', gamma='scale', C=1, random_state=1)
+
 svm.fit(X_train_std, y_train)
 
 #%% Check prediction accuracy on test set
 predictions = svm.predict(X_test_std)
 accuracy = accuracy_score(y_test, predictions)
 print(accuracy)
-'''
+
 '''Fitting logistic regression to the dataset'''
 log = LogisticRegression(C=10.**10, multi_class='ovr')
 log.fit(X_train_std, y_train)
