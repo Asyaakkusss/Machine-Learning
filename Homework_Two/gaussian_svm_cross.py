@@ -3,9 +3,8 @@ a) What is the maximum training set accuracy achievable by a linear SVM? Justify
 swer!
 
 The maximum training set accuracy that can be achieved by a linear SVM in this situation is 
-0.75. This is because no matter where the line is drawn, 2 data points will always be on the wrong
-side of it in the best case scenario. There are 8 data points, and 2/8 = 0.25. 1-0.25 = 0.75, so
-at best only 75% of the points will be properly placed. 
+0.50. This is because no matter where the line is drawn, half of the data points from each class 
+will always be on the wrong side of it even in the best case scenario.
 
 b) Find a kernel function for an SVM that perfectly separates the two classes and show that it
 does so.
