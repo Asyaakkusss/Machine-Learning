@@ -60,18 +60,14 @@ x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
 y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
 xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
                      np.arange(y_min, y_max, 0.01))
-
-lab = svm.predict(np.c_[xx.ravel(), yy.ravel()])
+lab = svm.predict(np.array([xx.ravel(), yy.ravel()]).T)
 lab = lab.reshape(xx.shape)
-
-plt.figure(figsize=(10, 6))
-plt.contourf(xx, yy, lab, alpha=0.8)
+plt.contourf(xx, yy, lab, alpha=0.3)
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
 plt.scatter(data[:, 0], data[:, 1], c=y_data, edgecolors='k', marker='o', label='Data points')
 plt.title('Decision Boundary of SVM with Gaussian Kernel')
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
-plt.xlim(x_min, x_max)
-plt.ylim(y_min, y_max)
-plt.legend()
 plt.grid()
 plt.show()
