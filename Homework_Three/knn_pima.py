@@ -6,3 +6,38 @@ tion accuracy. Also experiment with different values for the number of neighbors
 highest test set accuracy you are able to obtain. Submit your code in a file named knn_pima.py.
 '''
 
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np 
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+
+#get your Pima data 
+
+#turn csv file into np array 
+x = np.genfromtxt('/home/asyaakkus/Machine-Learning/pima-indians-diabetes.csv', delimiter=',', skip_header=1)
+
+#features
+X = x[:, :-1]
+
+#target values 
+y = x[:, -1]
+
+#Splitting data into 50% training and 50% test data and standardizing features 
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.5, random_state=1, stratify=y)
+sc = StandardScaler()
+sc.fit(X_train)
+X_train_std = sc.transform(X_train)
+X_test_std = sc.transform(X_test)
+
+#making the knn classifier 
+knn = KNeighborsClassifier(n_neighbors=5,
+p=2,
+metric='minkowski')
+knn.fit(X_train_std, y_train)
+
+#check prediction accuracy 
+predictions = knn.predict(X_test_std)
+accuracy = accuracy_score(y_test, predictions)
+print(accuracy)
