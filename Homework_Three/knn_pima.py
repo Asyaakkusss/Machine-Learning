@@ -16,6 +16,8 @@ L1 and L2 regularization at 0.765625.
 Number of neighbors: 
 When it comes to the number of neighbors, the highest test accuracy obtained is 0.7630208333333334 when 40 
 of the nearest neighbors are taken into account. 
+
+Overall highest accuracy: 0.765625. 
 '''
 
 from sklearn.neighbors import KNeighborsClassifier
