@@ -3,7 +3,6 @@ Train a decision tree that computes the logical AND function using entropy as th
 rion. How does it compare to the Perceptron solution? Draw possible decision boundaries for
 both a trained decision tree and Perceptron.
 
-
 The decision tree's accuracy is 1.0, while the perception solution's accuracy is 0.75. In that sense, 
 the decision tree does a better job of classifying the data. 
 
@@ -77,5 +76,3 @@ perceptron.fit(X_train, y_train)
 predictions = perceptron.predict(X_train)
 accuracy = accuracy_score(y_train, predictions)
 print(accuracy)
-
-
