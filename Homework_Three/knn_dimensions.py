@@ -19,3 +19,35 @@ Hint: Use the sklearn.neighbors.NearestNeighbors class to compute the 1-nearest 
 bor distances. Use the scipy.spatial.distance.pdist() function to compute the pairwise
 distances between all data points.
 '''
+
+import numpy as np 
+import matplotlib.pyplot as plt
+
+#function for calculating data points within the unit hypersphere 
+def hypersphere(data):
+
+    distances_from_origin = np.linalg.norm(data, axis=1)
+    
+    # Count how many points are within the unit hypersphere (distance <= 1)
+    fraction = np.sum(distances_from_origin <= 1) / len(data)
+    
+    return fraction
+
+
+#generating data points in d dimensions 
+d = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+fraction = []
+
+for i in d: 
+    data = np.random.uniform(low=-1, high=1, size=(1000, i))
+
+    fraction.append(hypersphere(data))
+    i = i + 1
+
+
+plt.plot(d, fraction)
+plt.title("Fraction of Datapoints within the Unit Hypersphere")
+plt.xlabel("Dimensions")
+plt.ylabel("Distance from Origin")
+plt.show()
+
