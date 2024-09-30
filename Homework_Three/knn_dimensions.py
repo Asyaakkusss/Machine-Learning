@@ -51,8 +51,7 @@ def distance_acrobatics(data):
     neighbors = NearestNeighbors(n_neighbors=2).fit(data)
     distances, indices = neighbors.kneighbors(data)
 
-    nearest_neighbor = distances
-
+    nearest_neighbor = distances[:, 1]
     pairwise_distance = pdist(data)
 
     mean_nn = np.mean(nearest_neighbor)
@@ -69,13 +68,11 @@ for i in d:
     data = np.random.uniform(low=-1, high=1, size=(1000, i))
 
     fraction.append(hypersphere(data))
-    i = i + 1
 
 for j in d: 
-    data = np.random.uniform(low=-1, high=1, size=(1000,i))
+    data = np.random.uniform(low=-1, high=1, size=(1000,j))
 
     mean_dist.append(distance_acrobatics(data))
-    j = j + 1
 
 
 plt.plot(d, fraction)
@@ -90,8 +87,8 @@ plt.xlabel("Dimensions")
 plt.ylabel("Average Closeness to Neighbor")
 plt.show()
 
-plt.plot()
 '''
-TODO: Are parts a and b correct? 
+TODO: Are parts a and b correct? for b, only way I could make it work as expected was to make 2 neares neighbors
+and then cutting off the last one 
 '''
 
