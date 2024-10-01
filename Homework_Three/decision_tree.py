@@ -40,7 +40,7 @@ print(accuracy)
 random_state = 1
 class Perceptron:
 
-    def __init__(self, learning_rate=0.0001, iterations=10, random_state=1):
+    def __init__(self, learning_rate=0.1, iterations=100, random_state=1):
         self.learning_rate = learning_rate
         self.iterations = iterations
         self.random_state = random_state
@@ -57,6 +57,7 @@ class Perceptron:
             for xi, target in zip(x, y):
                 update = self.learning_rate * (target - self.predict(xi))
                 self.weight += update * xi
+                print(self.weight)
                 self.bias += update
                 errors += int(update != 0.0)
             self.errors.append(errors)
@@ -76,3 +77,5 @@ perceptron.fit(X_train, y_train)
 predictions = perceptron.predict(X_train)
 accuracy = accuracy_score(y_train, predictions)
 print(accuracy)
+
+'''TODO: get perceptron to converge please i am begging you.'''

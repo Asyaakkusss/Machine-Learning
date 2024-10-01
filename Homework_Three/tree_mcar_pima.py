@@ -21,6 +21,9 @@ mean imputation: 0.6692708333333334
 median imputation: 0.6744791666666666
 kNN-based imputation: 0.6953125
 
+The highest accuracy I was able to obtain was with the kNN-based imputation. 
+
+TODO: add iterative imputer 
 '''
 
 import numpy as np
