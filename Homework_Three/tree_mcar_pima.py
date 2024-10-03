@@ -20,15 +20,16 @@ We will try out mean imputation, median imputation, regression-based imputation,
 mean imputation: 0.6692708333333334
 median imputation: 0.6744791666666666
 kNN-based imputation: 0.6953125
+iterative imputation: 0.6744791666666666
 
 The highest accuracy I was able to obtain was with the kNN-based imputation. 
 
-TODO: add iterative imputer 
 '''
 
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.impute import SimpleImputer, KNNImputer #, IterativeImputer
+from sklearn.experimental import enable_iterative_imputer  
+from sklearn.impute import SimpleImputer, KNNImputer, IterativeImputer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
@@ -66,14 +67,22 @@ mean_imputer.fit_transform(features)
 X_train_mean = mean_imputer.fit_transform(X_train)
 X_test_mean = mean_imputer.transform(X_test)
 '''
+#knn imputer 
+'''
 imputer_knn = KNNImputer(n_neighbors=5)
 imputer_knn.fit_transform(features)
 X_train_knn = imputer_knn.fit_transform(X_train)
 X_test_knn = imputer_knn.transform(X_test)
+'''
+#iterative imputer 
+imputer_iterative = IterativeImputer()
+imputer_iterative.fit_transform(features)
+X_train_imputer = imputer_iterative.fit_transform(X_train)
+X_test_imputer = imputer_iterative.transform(X_test)
 
 tree_model = DecisionTreeClassifier(criterion='gini', max_depth=4, random_state=1)
-tree_model.fit(X_train_knn, y_train)
+tree_model.fit(X_train_imputer, y_train)
 
-predictions = tree_model.predict(X_test_knn)
+predictions = tree_model.predict(X_test_imputer)
 accuracy = accuracy_score(y_test, predictions)
 print(accuracy)

@@ -87,8 +87,4 @@ plt.xlabel("Dimensions")
 plt.ylabel("Average Closeness to Neighbor")
 plt.show()
 
-'''
-TODO: Are parts a and b correct? for b, only way I could make it work as expected was to make 2 neares neighbors
-and then cutting off the last one 
-'''
 
