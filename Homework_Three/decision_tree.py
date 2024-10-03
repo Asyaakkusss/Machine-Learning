@@ -3,8 +3,8 @@ Train a decision tree that computes the logical AND function using entropy as th
 rion. How does it compare to the Perceptron solution? Draw possible decision boundaries for
 both a trained decision tree and Perceptron.
 
-The decision tree's accuracy is 1.0, while the perception solution's accuracy is 0.75. In that sense, 
-the decision tree does a better job of classifying the data. 
+The decision tree's accuracy is 1.0, while the perception solution's accuracy is also 1.0. In that sense, 
+both do a pretty good job classifying this data properly. 
 
 The possible decision boundaries are attached in a separate file named possible_decision_boundaries.pdf 
 """
@@ -57,7 +57,6 @@ class Perceptron:
             for xi, target in zip(x, y):
                 update = self.learning_rate * (target - self.predict(xi))
                 self.weight += update * xi
-                print(self.weight)
                 self.bias += update
                 errors += int(update != 0.0)
             self.errors.append(errors)
@@ -70,12 +69,10 @@ class Perceptron:
         return np.where(self.net_input(X) >= 0.0, 1, 0)
 
 
-perceptron = Perceptron(0.0001, 10, random_state)
+perceptron = Perceptron(0.1, 10, random_state)
 
 perceptron.fit(X_train, y_train)
 
 predictions = perceptron.predict(X_train)
 accuracy = accuracy_score(y_train, predictions)
 print(accuracy)
-
-'''TODO: get perceptron to converge please i am begging you.'''
