@@ -24,7 +24,9 @@ Answer:
 3. SVR Linear: 0.4782529186714335
 4. SVR Gaussian: 0.004707850737426522
 5. SVR Polynomial: 
-6. Elastic Net: 
+6. Elastic Net: 0.5602096449942575
+
+The maximum test R**2 I was able to achieve was random forest overall. 
 
 '''
 import numpy as np 
@@ -45,14 +47,23 @@ targets = data[:, -1]
 
 x_train, x_test, y_train, y_test = train_test_split(features, targets, test_size=0.5, random_state = 1)
 
+#create polynomial feature transformer for elastic net with polynomial features 
+poly = PolynomialFeatures(degree=3) 
+
+x_train_poly = poly.fit_transform(x_train)
+
+x_test_poly = poly.transform(x_test) 
+
+
 #model = RandomForestRegressor()
 #model = KNeighborsRegressor(n_neighbors=100)
 #model = SVR(kernel='rbf', C=10, gamma=0.1, epsilon=.001)
 #model = SVR(kernel='linear', C=0.001, gamma='auto', epsilon=0.04)
-model = SVR(kernel='poly', C=100, gamma='auto', degree=3, epsilon=.1, coef0=1)
-model.fit(x_train, y_train)
+model = ElasticNet(alpha=10, l1_ratio=1)  # Adjust alpha and l1_ratio as needed
 
-prediction = model.predict(x_test)
+model.fit(x_train_poly, y_train)
+
+prediction = model.predict(x_test_poly)
 
 r_squared = r2_score(y_test, prediction)
 print(r_squared)

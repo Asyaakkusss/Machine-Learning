@@ -42,10 +42,10 @@ print(np.shape(testPoly))
 print(np.shape(trainPoly))
 
 testPoly_X = testPoly[:, 0].reshape(-1,1)
-testPoly_Y = testPoly[:, 1].reshape(-1,1)
+testPoly_Y = testPoly[:, 1]
 
 trainPoly_X = trainPoly[:, 0].reshape(-1,1)
-trainPoly_Y = trainPoly[:, 1].reshape(-1,1)
+trainPoly_Y = trainPoly[:, 1]
 
 #create arrays for test and train mean squared errors 
 arr_testmse = []
