@@ -38,7 +38,7 @@ arr_testmse = []
 arr_trainmse = []
 
 #training and testing 
-for deg in range(1,9): 
+for deg in range(1,10): 
     poly = PolynomialFeatures(deg);
     train_poly = poly.fit_transform(trainPoly_X)
     test_poly = poly.transform(testPoly_X)
@@ -57,15 +57,12 @@ for deg in range(1,9):
     test_meansqerr = mean_squared_error(testPoly_Y, test_prediction)
     arr_testmse.append(test_meansqerr)
 
-iterations_array = np.arange(1, 9)
+iterations_array = np.arange(1, 10)
 
-plt.plot(iterations_array, arr_trainmse, label="Training Data Mean Squared Error")
+plt.plot(iterations_array, arr_trainmse, label="Train MSE")
+plt.plot(iterations_array, arr_testmse, label="Test MSE")
 plt.xlabel("Polynomial Degree")
 plt.ylabel("Mean Squared Error (MSE)")
 plt.title("Training Data Mean Squared Error with OLS")
-plt.show()
-plt.plot(iterations_array, arr_testmse, label ="Test Data Mean Squared Error")
-plt.xlabel("Polynomial Degree")
-plt.ylabel("Mean Squared Error (MSE)")
-plt.title("Test Data Mean Squared Error with OLS")
+plt.legend()
 plt.show()
