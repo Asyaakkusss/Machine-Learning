@@ -36,13 +36,12 @@ trainPoly_Y = trainPoly[:, 1].reshape(-1,1)
 #create arrays for test and train mean squared errors 
 arr_testmse = []
 arr_trainmse = []
-
+arr_weights = [] 
 #training and testing 
 for deg in range(1,10): 
     poly = PolynomialFeatures(deg);
     train_poly = poly.fit_transform(trainPoly_X)
     test_poly = poly.transform(testPoly_X)
-
 
     model = LinearRegression(); 
     model.fit(train_poly, trainPoly_Y)
@@ -57,6 +56,9 @@ for deg in range(1,10):
     test_meansqerr = mean_squared_error(testPoly_Y, test_prediction)
     arr_testmse.append(test_meansqerr)
 
+    #find weights
+    arr_weights.append(np.sum(model.coef_**2)/deg)
+
 iterations_array = np.arange(1, 10)
 
 plt.plot(iterations_array, arr_trainmse, label="Train MSE")
@@ -66,3 +68,12 @@ plt.ylabel("Mean Squared Error (MSE)")
 plt.title("Training Data Mean Squared Error with OLS")
 plt.legend()
 plt.show()
+
+
+plt.plot(iterations_array, arr_weights)
+plt.xlabel("Polynomial Degree")
+plt.ylabel("Normalized Squared Magnitude of Weight Vector")
+plt.yscale("log")
+plt.title("Normalized Squared Weight Norm with OLS")
+plt.show()
+
