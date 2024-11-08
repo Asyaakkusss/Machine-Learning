@@ -76,6 +76,8 @@ for deg in range(1,10):
 iterations_array = np.arange(1, 10)
 
 plt.plot(iterations_array, arr_trainmse, label="Train MSE")
+plt.plot()
+plt.show()
 plt.plot(iterations_array, arr_testmse, label="Test MSE")
 plt.xlabel("Polynomial Degree")
 plt.ylabel("Mean Squared Error (MSE)")

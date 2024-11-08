@@ -22,9 +22,8 @@ Answer:
 1. Random Forest Regression: 0.7025374494908679
 2. K-nearest neighbors regression: 0.43389041538710194
 3. SVR Linear: 0.4782529186714335
-4. SVR Gaussian: 0.004707850737426522
-5. SVR Polynomial: 
-6. Elastic Net: 0.5602096449942575
+4. SVR Gaussian: 0.004707850737426522 #try out with epsilon and pay attention to it, C and gamma 
+5. Elastic Net: 0.5602096449942575
 
 The maximum test R**2 I was able to achieve was random forest overall. 
 
