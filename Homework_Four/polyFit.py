@@ -26,7 +26,11 @@ it is not a straightforward curve.
 c) Create the same two plots using ridge regression (L2 penalty) with regularization strength
 𝛼 = 10−6 instead of OLS and compare the results with OLS.
 
-When compared to OLS, the two plots using ridge regression are more 
+When compared to OLS, the two plots using ridge regression are a lot smoother. Also, the MSE of the train and test
+data both go down as the number of dimensions increases compared to OLS where only the MSE
+of the train data goes down and the test data MSE increases dramatically. Additionally, the normalized squared magnitude of 
+the weight vector increases but plateaus at a certain point unlike in OLS where it increases indefinitely. Overall, the ridge 
+regression is a better model for this data set.
 '''
 
 #imports
@@ -55,11 +59,12 @@ arr_trainmse = []
 arr_weights = [] 
 #training and testing 
 for deg in range(1,10): 
-    poly = PolynomialFeatures(deg);
+    poly = PolynomialFeatures(deg)
     train_poly = poly.fit_transform(trainPoly_X)
     test_poly = poly.transform(testPoly_X)
 
-    model = LinearRegression(); 
+    #model = LinearRegression()
+    model = Ridge(alpha=10e-6)
     model.fit(train_poly, trainPoly_Y)
 
     #prediction step for train 
