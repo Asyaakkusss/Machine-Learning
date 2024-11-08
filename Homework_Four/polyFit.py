@@ -25,6 +25,8 @@ it is not a straightforward curve.
 
 c) Create the same two plots using ridge regression (L2 penalty) with regularization strength
 𝛼 = 10−6 instead of OLS and compare the results with OLS.
+
+When compared to OLS, the two plots using ridge regression are more 
 '''
 
 #imports
@@ -75,22 +77,27 @@ for deg in range(1,10):
 
 iterations_array = np.arange(1, 10)
 
-plt.plot(iterations_array, arr_trainmse, label="Train MSE")
-plt.plot()
-plt.show()
-plt.plot(iterations_array, arr_testmse, label="Test MSE")
-plt.xlabel("Polynomial Degree")
-plt.ylabel("Mean Squared Error (MSE)")
-plt.title("Training Data Mean Squared Error with OLS")
-plt.legend()
-plt.show()
+fig, ax1 = plt.subplots()
 
+ax1.plot(iterations_array, arr_trainmse, label="Train MSE", color='blue', linestyle='-', marker='o')
+ax1.set_xlabel("Polynomial Degree")
+ax1.set_ylabel("Train MSE", color='blue')
+ax1.tick_params(axis='y', labelcolor='blue')
+
+ax2 = ax1.twinx()
+ax2.plot(iterations_array, arr_testmse, label="Test MSE", color='red', linestyle='--', marker='x')
+ax2.set_ylabel("Test MSE", color='red')
+ax2.tick_params(axis='y', labelcolor='red')
+
+plt.title("Train vs Test MSE")
+fig.tight_layout()
+plt.show()
 
 plt.plot(iterations_array, arr_weights)
 plt.xlabel("Polynomial Degree")
 plt.ylabel("Normalized Squared Magnitude of Weight Vector")
 plt.yscale("log")
-plt.title("Normalized Squared Weight Norm with OLS")
+plt.title("Normalized Squared Weight Norm")
 plt.show()
 
 
