@@ -59,6 +59,7 @@ lr_l2 = LogisticRegression(penalty='l1', C=0.1, solver='saga', max_iter=10000, r
 selector = SelectFromModel(lr_en)
 
 selector.fit(X_train_std, y_train)
+print("hello!")
 
 X_train_sel = selector.transform(X_train_std)
 X_test_sel = selector.transform(X_test_std)
